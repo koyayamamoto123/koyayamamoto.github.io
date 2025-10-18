@@ -10,8 +10,8 @@ export default function Languages() {
       </CardHeader>
       <CardContent>
         <p className="text-base">English (Fluent)</p>
-        <p className="text-base">Afaan Oromoo (Native)</p>
-        <p className="text-base">Amharic (Fluent)</p>
+        <p className="text-base">Japanese (Native)</p>
+        <p className="text-base">Italian (Basic)</p>
       </CardContent>
     </Card>
   );
