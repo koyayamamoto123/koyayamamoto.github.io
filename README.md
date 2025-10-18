@@ -1,4 +1,4 @@
-# Jiru Gutema's Profile Portfolio
+# Koya Yamamoto's Profile Portfolio
 
 This is a personal portfolio website to showcase my projects and skills.
 
