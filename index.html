@@ -1,60 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Koya Yamamoto - Aerospace Engineer & Researcher</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <title>Koya Yamamoto | Aerospace Engineer Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: linear-gradient(120deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+      color: #22223b;
+      margin: 0; padding: 0;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 8px 40px rgba(80,60,140,0.12);
+      padding: 2.5rem 2.8rem;
+      animation: fade-in 1s;
+    }
+    @keyframes fade-in {from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:none;}}
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 36px;
+      margin-bottom: 2rem;
+      border-bottom: 3px solid #e0e0ef;
+      padding-bottom: 2rem;
+    }
+    .profile-img {
+      flex-shrink: 0;
+      width: 130px; height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #667eea; box-shadow: 0 3px 21px #b9b1ea5e;
+    }
+    .header-info { flex: 1 1 300px; }
+    h1 {
+      font-size: 2.3rem; margin: 0 0 0.5rem 0;
+      letter-spacing: .02em;
+      color: #667eea;
+      text-shadow: 0 2px 8px #ccc3;
+    }
+    .subtitle { font-size: 1.1rem; color: #5f5786; margin-bottom: 0.5rem;}
+    .contact-links a {
+      color: #764ba2; text-decoration: none;
+      font-weight: 500;
+      margin-right: 20px;
+      transition: color .18s;
+    }
+    .contact-links a:hover {color:#22223b;}
+    section { margin-bottom: 2.3rem; }
+    section h2 {
+      font-size: 1.45rem; margin-bottom: 1em; color: #4e458c; letter-spacing: 0.01em;
+      border-left: 6px solid #667eea50; padding-left: .7em;
+    }
+    .info-grid { display: flex; flex-wrap: wrap; gap: 36px; }
+    .card {
+      background: #f6f6fd; border-radius: 16px;
+      box-shadow: 0 2px 9px #a89ae816;
+      padding: 1.4em 1.4em 1em 1.4em;
+      margin-bottom: 1.2rem;
+    }
+    .card h3 { margin: 0.3em 0 .7em; font-size: 1.13em; color: #667eea; }
+    ul {padding-left: 1.25em;}
+    li {margin-bottom: 0.4em;}
+    .skills-list, .lang-list {display: flex; flex-wrap: wrap; gap: 1.7em;}
+    .skills-group { min-width: 170px;}
+    .pub-list li { font-size: 0.97em; margin-bottom: 0.7em;}
+    @media(max-width:700px) {
+      .container { padding: 1.1em; }
+      .header { flex-direction: column; align-items: flex-start; gap: 18px;}
+      .header-info { min-width: 0; }
+      .info-grid {flex-direction: column;}
+      .skills-list, .lang-list {flex-direction: column;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="header">
+      <img src="profile.jpg" alt="Profile photo" class="profile-img" />
+      <div class="header-info">
+        <h1>Koya Yamamoto</h1>
+        <div class="subtitle">
+          PhD Candidate in Aerospace Engineering<br>
+          College Station, TX
+        </div>
+        <div class="contact-links">
+          <a href="mailto:koyayamamoto123@gmail.com">koyayamamoto123@gmail.com</a>
+          <a href="tel:9793260019">(979) 326-0019</a>
+          <a href="https://linkedin.com/in/koyayamamoto" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </section>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.7;
-            color: #2c3e50;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 40px 20px;
-        }
+    <section>
+      <h2>Objective</h2>
+      <div class="card">
+        PhD candidate in Aerospace Engineering with a background in control theory, state estimation, and hardware/software validation. Seeking to apply modeling and controls expertise to automotive, robotics, and drone motion control systems.
+      </div>
+    </section>
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            animation: fadeIn 0.8s ease-in;
-        }
+    <section>
+      <h2>Education</h2>
+      <div class="info-grid">
+        <div class="card">
+          <h3>PhD Aerospace Engineering</h3>
+          Texas A&M University, College Station, TX (2022–Present) <br>
+          GPA: 4.0/4.0<br>
+          <em>Main courses:</em> Random Dynamical Systems, Celestial Mechanics, Spacecraft Dynamics, Optimal Spacecraft Attitude and Orbital Maneuvers, Estimation of Dynamic Systems, Graduate Mathematics
+        </div>
+        <div class="card">
+          <h3>BSc Mechanical Engineering</h3>
+          Waseda University, Tokyo, Japan (2018–2022)<br>
+          GPA: 3.6/4.0<br>
+          <em>Main courses:</em> Calculus, Linear Algebra, Material Mechanics, Mechatronics, Fluid Dynamics, C Programming, Satellite Design
+        </div>
+      </div>
+    </section>
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    <section>
+      <h2>Technical Skills</h2>
+      <div class="skills-list">
+        <div class="skills-group">
+          <b>Programming</b>
+          <ul><li>MATLAB, Simulink, Python, C++</li></ul>
+        </div>
+        <div class="skills-group">
+          <b>Control & Estimation</b>
+          <ul><li>MPC, PID, Optimal control, Kalman (EKF, UKF), Least Square Estimation</li></ul>
+        </div>
+        <div class="skills-group">
+          <b>Optimization Tools</b>
+          <ul><li>IPOPT, SNOPT, fmincon, CasADi</li></ul>
+        </div>
+        <div class="skills-group">
+          <b>Hardware Platforms</b>
+          <ul><li>Arduino, Raspberry Pi</li></ul>
+        </div>
+        <div class="skills-group">
+          <b>CAD/Analysis</b>
+          <ul><li>SolidWorks, AutoCAD, Femap, Nastran</li></ul>
+        </div>
+        <div class="skills-group">
+          <b>Other</b>
+          <ul><li>Microsoft Office, LaTeX</li></ul>
+        </div>
+      </div>
+    </section>
 
-        /* Header Section */
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 60px 50px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+    <section>
+      <h2>Work Experience</h2>
+      <div class="card">
+        <h3>Navigation Engineer Intern</h3>
+        VectorNav, Dallas, TX <span style="float:right;">May–Aug 2023</span>
+        <ul>
+          <li>Developed smoothing algorithms for post-Kalman filtering (2x accuracy improvement in navigation systems).</li>
+          <li>Created high-precision geoid undulation algorithms using EGM 2008.</li>
+          <li>Derived recursive formulas for Legendre polynomials.</li>
+        </ul>
+      </div>
+    </section>
 
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom:
+    <section>
+      <h2>Research Experience</h2>
+      <div class="card">
+        <h3>Graduate Research Assistant</h3>
+        Texas A&M University, Aug 2022–Present
+        <ul>
+          <li>Developed Complex Step Differentiation method for efficient dynamic system derivatives.</li>
+          <li>Applied linear least square estimation and covariance analysis for accelerometer configurations.</li>
+          <li>Implemented graph coloring for trajectory optimization (2x real-time speedup).</li>
+          <li>Validated hardware-in-the-loop trajectory optimization on Arduino/Raspberry Pi.</li>
+          <li>Designed MPC algorithms for uncertain nonlinear systems.</li>
+          <li>Integrated deep RL with MPC for motion planning in uncertain dynamics.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Technical Trainee</h3>
+        JAXA/ISAS, Kanagawa, Japan <span style="float:right;">Summer 2021</span>
+        <ul>
+          <li>Researched liquid sloshing on spacecraft lunar landing, built physics-based models.</li>
+          <li>Simulated stability & failure modes; validated control laws for landing gear.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Research Project</h3>
+        Waseda University, Tokyo, 2020–2021
+        <ul>
+          <li>Stratosphere balloon experiments for alignment monitoring system.</li>
+          <li>Structural analysis (Femap, Nastran), CAD design with SolidWorks.</li>
+          <li>Built and tested physical prototypes.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Selected Publications</h2>
+      <ul class="pub-list card">
+        <li>
+          Yamamoto, K., Taheri, E., & Junkins, J.L. “Nonlinear MPC for Cislunar Trajectory Correction...”<br>
+          American Control Conference (ACC), 2026 (under review)
+        </li>
+        <li>
+          Yamamoto, K., Taheri, E., Junkins, J. L. "Jacobian Coloring for Multi-Impulse Cislunar Trajectory Optimization", Journal of Aerospace Sci & Tech, Aug 2025 (under review)
+        </li>
+        <li>
+          Yamamoto, K., Junkins, J. L. "Advances in High Precision Partial Derivative Approximation for Black Box Functions", Journal of Astronautical Sciences, June 2025 (under review)
+        </li>
+        <li>
+          Yamamoto, K., Taheri, E., Junkins, J.L. “Comparison of NLP Solvers and Derivative Accuracy...”, ACC, IEEE, July 8, 2025
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Languages</h2>
+      <div class="lang-list">
+        <div class="skills-group"><b>Japanese:</b> Native</div>
+        <div class="skills-group"><b>English:</b> Fluent</div>
+        <div class="skills-group"><b>Italian:</b> Advanced</div>
+        <div class="skills-group"><b>Spanish:</b> Beginner</div>
+      </div>
+    </section>
+    <footer style="text-align:center;color:#998fcc;font-size:1em;margin-top:2em;">
+      &copy; 2025 Koya Yamamoto. Portfolio generated with HTML & CSS.
+    </footer>
+  </div>
+</body>
+</html>
