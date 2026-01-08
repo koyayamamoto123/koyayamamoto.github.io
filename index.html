@@ -21,13 +21,18 @@
       --planet3-dark: #6dd5fa;
       --planet3-light: #72e4a4;
     }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
       transition: background 0.7s cubic-bezier(.36,1.89,.44,.92), color .6s;
       font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
-      margin: 0; padding: 0;
       min-height: 100vh;
       background: var(--main-bg-dark);
       color: var(--text-dark);
+      display: flex;
     }
     body.light {
       background: var(--main-bg-light);
@@ -39,70 +44,192 @@
       pointer-events: none; z-index: 0;
       display: block;
     }
-    .container {
-      position: relative; z-index: 1;
-      max-width: 900px;
-      margin: 38px auto;
-      background: var(--card-bg-dark);
-      border-radius: 21px;
-      box-shadow: 0 8px 40px rgba(80,60,140,0.12);
-      padding: 2.5rem 2.8rem;
-      backdrop-filter: blur(1.5px);
-      animation: fade-in 1.2s;
+    /* Sidebar Navigation */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 280px;
+      height: 100vh;
+      background: rgba(35, 37, 66, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 2.5rem 1.8rem;
+      overflow-y: auto;
+      z-index: 10;
+      border-right: 1px solid rgba(109, 213, 250, 0.1);
     }
-    body.light .container {
-      background: var(--card-bg-light);
-      box-shadow: 0 8px 40px #dbeafea0;
+    body.light .sidebar {
+      background: rgba(248, 250, 253, 0.98);
+      border-right-color: rgba(18, 109, 228, 0.1);
     }
-    @keyframes fade-in {from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:none;}}
-    .header {
-      display: flex; flex-wrap: wrap;
-      align-items: center;
-      gap: 35px;
-      margin-bottom: 2.1rem;
-      border-bottom: 3px solid #40679c33;
+    .sidebar-profile {
+      text-align: center;
+      margin-bottom: 2.5rem;
       padding-bottom: 1.8rem;
-      position: relative;
+      border-bottom: 2px solid rgba(109, 213, 250, 0.2);
     }
-    .profile-img {
-      flex-shrink: 0;
-      width: 125px; height: 125px;
+    body.light .sidebar-profile {
+      border-bottom-color: rgba(18, 109, 228, 0.15);
+    }
+    .sidebar-img {
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       object-fit: cover;
-      border: 5px solid var(--accent-dark);
-      box-shadow: 0 2px 16px #0004;
+      border: 4px solid var(--accent-dark);
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 12px #0004;
       transition: border-color .3s;
     }
-    body.light .profile-img { border-color: var(--accent-light);}
-    .header-info { flex: 1 1 270px; }
-    h1 {
-      font-size: 2.2rem; margin: 0 0 0.5rem 0; letter-spacing: .025em;
-      color: var(--accent-dark); text-shadow: 0 2px 12px #12193360;
+    body.light .sidebar-img {
+      border-color: var(--accent-light);
     }
-    body.light h1 { color: var(--accent-light); text-shadow: none; }
-    .subtitle {
-      font-size: 1.1rem;
-      color: #b9b1ea;
+    .sidebar h1 {
+      font-size: 1.4rem;
       margin-bottom: 0.3rem;
+      color: var(--accent-dark);
+      letter-spacing: 0.02em;
+    }
+    body.light .sidebar h1 {
+      color: var(--accent-light);
+    }
+    .sidebar-subtitle {
+      font-size: 0.85rem;
+      color: #b9b1ea;
       font-weight: 400;
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
     }
-    body.light .subtitle { color: #5b82a6;}
-    .contact-links a {
-      color: var(--accent-dark); text-decoration: none; font-weight: 500;
-      margin-right: 22px; transition: color .2s;
+    body.light .sidebar-subtitle {
+      color: #5b82a6;
     }
-    body.light .contact-links a { color: var(--accent-light);}
-    .contact-links a:hover { color: #4e458c; }
-    section { margin-bottom: 2.2rem; }
+    .sidebar-location {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 1.2rem;
+    }
+    body.light .sidebar-location {
+      color: rgba(27, 35, 55, 0.6);
+    }
+    .sidebar-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+    .sidebar-contact a {
+      color: var(--accent-dark);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color .2s;
+      word-break: break-all;
+    }
+    body.light .sidebar-contact a {
+      color: var(--accent-light);
+    }
+    .sidebar-contact a:hover {
+      color: #4e458c;
+    }
+    .sidebar-nav {
+      list-style: none;
+      margin-top: 2rem;
+    }
+    .sidebar-nav li {
+      margin-bottom: 0.8rem;
+    }
+    .sidebar-nav a {
+      display: block;
+      padding: 0.7rem 0.9rem;
+      color: #b9b1ea;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all .2s;
+      font-size: 0.95rem;
+      border-left: 3px solid transparent;
+    }
+    body.light .sidebar-nav a {
+      color: #5b82a6;
+    }
+    .sidebar-nav a:hover,
+    .sidebar-nav a.active {
+      background: rgba(109, 213, 250, 0.15);
+      color: var(--accent-dark);
+      border-left-color: var(--accent-dark);
+    }
+    body.light .sidebar-nav a:hover,
+    body.light .sidebar-nav a.active {
+      background: rgba(18, 109, 228, 0.1);
+      color: var(--accent-light);
+      border-left-color: var(--accent-light);
+    }
+
+    /* Main Content Area */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+    .theme-btn {
+      position: fixed;
+      top: 22px;
+      right: 40px;
+      z-index: 12;
+      background: var(--accent-dark);
+      border: none;
+      color: #fff;
+      font-size: 1.13em;
+      padding: 10px 22px;
+      border-radius: 22px;
+      box-shadow: 0 4px 16px #0003, 0 2px 10px #fff9;
+      cursor: pointer;
+      outline: none;
+      transition: background .3s, color .2s;
+    }
+    .theme-btn:active {
+      background: #3a559b;
+    }
+    body.light .theme-btn {
+      background: var(--accent-light);
+      color: #fff;
+    }
+
+    .container {
+      position: relative;
+      max-width: 950px;
+      margin: 2rem auto;
+      padding: 2.5rem 2.8rem;
+      animation: fade-in 1.2s;
+    }
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    section {
+      margin-bottom: 2.2rem;
+    }
     section h2 {
-      font-size: 1.3rem; margin-bottom: 1em; letter-spacing: 0.01em;
+      font-size: 1.3rem;
+      margin-bottom: 1em;
+      letter-spacing: 0.01em;
       color: var(--planet3-dark);
-      border-left: 6px solid var(--accent-dark); padding-left: .7em;
+      border-left: 6px solid var(--accent-dark);
+      padding-left: .7em;
     }
-    body.light section h2 { color: var(--planet3-light); border-left: 6px solid var(--accent-light);}
-    .info-grid { display: flex; flex-wrap: wrap; gap: 32px; }
+    body.light section h2 {
+      color: var(--planet3-light);
+      border-left: 6px solid var(--accent-light);
+    }
+
+    .info-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
     .card {
-      background: rgba(37,27,69,0.56);
+      background: rgba(37, 27, 69, 0.56);
       border-radius: 16px;
       box-shadow: 0 2px 9px #a89ae830;
       padding: 1.3em 1.3em 1em 1.3em;
@@ -115,78 +242,209 @@
       color: #10243e;
     }
     .card h3 {
-      margin: .2em 0 .8em; font-size: 1.11em; color: var(--planet1-dark);
+      margin: .2em 0 .8em;
+      font-size: 1.11em;
+      color: var(--planet1-dark);
     }
-    body.light .card h3 { color: var(--planet1-light);}
-    ul {padding-left: 1.15em;}
-    li {margin-bottom: 0.34em;}
-    .skills-list, .lang-list {display: flex; flex-wrap: wrap; gap: 1.6em;}
-    .skills-group { min-width: 170px;}
-    .pub-list li { font-size: 0.97em; margin-bottom: 0.7em;}
+    body.light .card h3 {
+      color: var(--planet1-light);
+    }
+    ul {
+      padding-left: 1.15em;
+    }
+    li {
+      margin-bottom: 0.34em;
+    }
+    .skills-list, .lang-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.6em;
+    }
+    .skills-group {
+      min-width: 170px;
+    }
+    .pub-list li {
+      font-size: 0.97em;
+      margin-bottom: 0.7em;
+    }
+
     .space-decor {
-      position: absolute; z-index: 1;
-      top: 0; left: 0; width: 100%; height: 0;
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
       pointer-events: none;
     }
-    .planet { position: absolute; border-radius: 50%; opacity: 0.9; }
-    .planet1 {width:54px;height:54px;top:10px;left:90px; background: radial-gradient(circle at 60% 40%, var(--planet1-dark) 65%, #ffeaa785 100%);}
-    .planet2 {width:44px;height:44px;top:60px;right:58px; background:radial-gradient(circle at 60% 40%, var(--planet2-dark) 65%, #ffdae7 100%);}
-    .planet3 {width:35px;height:35px;bottom:-15px;left:24px; background:radial-gradient(circle at 70% 30%, var(--planet3-dark) 65%, #d7f9fda2 100%);}
-    body.light .planet1 {background:radial-gradient(circle at 60% 40%, var(--planet1-light) 65%, #fff9dc 100%);}
-    body.light .planet2 {background:radial-gradient(circle at 60% 40%, var(--planet2-light) 65%, #ffe1ef 100%);}
-    body.light .planet3 {background:radial-gradient(circle at 70% 30%, var(--planet3-light) 65%, #e0fff0 100%);}
+    .planet {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.9;
+    }
+    .planet1 {
+      width: 54px;
+      height: 54px;
+      top: 10px;
+      left: 90px;
+      background: radial-gradient(circle at 60% 40%, var(--planet1-dark) 65%, #ffeaa785 100%);
+    }
+    .planet2 {
+      width: 44px;
+      height: 44px;
+      top: 60px;
+      right: 58px;
+      background: radial-gradient(circle at 60% 40%, var(--planet2-dark) 65%, #ffdae7 100%);
+    }
+    .planet3 {
+      width: 35px;
+      height: 35px;
+      bottom: -15px;
+      left: 24px;
+      background: radial-gradient(circle at 70% 30%, var(--planet3-dark) 65%, #d7f9fda2 100%);
+    }
+    body.light .planet1 {
+      background: radial-gradient(circle at 60% 40%, var(--planet1-light) 65%, #fff9dc 100%);
+    }
+    body.light .planet2 {
+      background: radial-gradient(circle at 60% 40%, var(--planet2-light) 65%, #ffe1ef 100%);
+    }
+    body.light .planet3 {
+      background: radial-gradient(circle at 70% 30%, var(--planet3-light) 65%, #e0fff0 100%);
+    }
+
     .rocket {
-      position: absolute; top: -60px; right: 125px; width: 60px; height: 85px;
-      z-index:2;
+      position: absolute;
+      top: -60px;
+      right: 125px;
+      width: 60px;
+      height: 85px;
+      z-index: 2;
       transform: rotate(-5deg);
-      animation: rocket-float 4s infinite cubic-bezier(.8,-0.06,.69,1.04);
+      animation: rocket-float 4s infinite cubic-bezier(.8, -0.06, .69, 1.04);
     }
     @keyframes rocket-float {
-      0%,100% { transform: translateY(0) rotate(-5deg);}
-      50% { transform: translateY(-22px) rotate(0);}
+      0%, 100% {
+        transform: translateY(0) rotate(-5deg);
+      }
+      50% {
+        transform: translateY(-22px) rotate(0);
+      }
     }
-    @media(max-width:700px) {
-      .container { padding: 1.07em;}
-      .header { flex-direction: column; align-items: flex-start; gap: 17px;}
-      .header-info { min-width: 0; }
-      .info-grid {flex-direction: column;}
-      .skills-list, .lang-list {flex-direction: column;}
-      .rocket {display:none;}
-      .planet1,.planet2,.planet3{ display:none;}
+
+    footer {
+      text-align: center;
+      color: #c6cef1;
+      font-size: 1em;
+      margin-top: 2em;
+      padding-bottom: 2rem;
     }
-    .theme-btn {
-      position: fixed; top:22px; right:40px; z-index:12;
-      background: var(--accent-dark);
-      border: none; color: #fff;
-      font-size: 1.13em;
-      padding: 10px 22px;
-      border-radius: 22px;
-      box-shadow: 0 4px 16px #0003, 0 2px 10px #fff9;
-      cursor: pointer; outline: none;
-      transition: background .3s, color .2s;
+    body.light footer {
+      color: #5b82a6;
     }
-    .theme-btn:active {background:#3a559b;}
-    body.light .theme-btn { background: var(--accent-light); color: #fff;}
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid rgba(109, 213, 250, 0.1);
+        padding: 1.5rem;
+      }
+      .main-content {
+        margin-left: 0;
+      }
+      .container {
+        padding: 1.5rem;
+      }
+      .sidebar-profile {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        text-align: left;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+      }
+      .sidebar-img {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 0;
+        flex-shrink: 0;
+      }
+      .sidebar-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+      .sidebar-nav li {
+        margin-bottom: 0;
+      }
+      .sidebar-nav a {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.85rem;
+      }
+      .info-grid {
+        flex-direction: column;
+      }
+      .skills-list, .lang-list {
+        flex-direction: column;
+      }
+      .rocket {
+        display: none;
+      }
+      .planet1, .planet2, .planet3 {
+        display: none;
+      }
+      .theme-btn {
+        top: 12px;
+        right: 15px;
+        padding: 8px 16px;
+        font-size: 1em;
+      }
+    }
   </style>
 </head>
 <body>
   <canvas class="stars"></canvas>
   <button class="theme-btn" onclick="toggleTheme()">Toggle Theme</button>
-  <div class="container">
-    <section class="header">
-      <img src="profile.jpg" alt="Profile photo" class="profile-img" />
-      <div class="header-info">
+
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar">
+    <div class="sidebar-profile">
+      <img src="profile.jpg" alt="Profile photo" class="sidebar-img" />
+      <div>
         <h1>Koya Yamamoto</h1>
-        <div class="subtitle">
-          PhD Candidate in Aerospace Engineering<br>
-          College Station, TX
+        <div class="sidebar-subtitle">
+          PhD Candidate in Aerospace Engineering
         </div>
-        <div class="contact-links">
+        <div class="sidebar-location">📍 College Station, TX</div>
+        <div class="sidebar-contact">
           <a href="mailto:koyayamamoto123@gmail.com">koyayamamoto123@gmail.com</a>
           <a href="tel:9793260019">(979) 326-0019</a>
           <a href="https://linkedin.com/in/koyayamamoto" target="_blank">LinkedIn</a>
         </div>
       </div>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="#objective" class="nav-link" onclick="setActive(this)">Objective</a></li>
+        <li><a href="#education" class="nav-link" onclick="setActive(this)">Education</a></li>
+        <li><a href="#skills" class="nav-link" onclick="setActive(this)">Skills</a></li>
+        <li><a href="#experience" class="nav-link" onclick="setActive(this)">Experience</a></li>
+        <li><a href="#research" class="nav-link" onclick="setActive(this)">Research</a></li>
+        <li><a href="#publications" class="nav-link" onclick="setActive(this)">Publications</a></li>
+        <li><a href="#languages" class="nav-link" onclick="setActive(this)">Languages</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container">
       <div class="space-decor">
         <span class="planet planet1"></span>
         <span class="planet planet2"></span>
@@ -203,134 +461,143 @@
           </g>
         </svg>
       </div>
-    </section>
-    <section>
-      <h2>Objective</h2>
-      <div class="card">
-        PhD candidate in Aerospace Engineering with a background in control theory, state estimation, and hardware/software validation. Seeking to apply modeling and controls expertise to automotive, robotics, and drone motion control systems.
-      </div>
-    </section>
-    <section>
-      <h2>Education</h2>
-      <div class="info-grid">
+
+      <section id="objective">
+        <h2>Objective</h2>
         <div class="card">
-          <h3>PhD Aerospace Engineering</h3>
-          Texas A&M University, College Station, TX (2022–Present) <br>
-          GPA: 4.0/4.0<br>
-          <em>Main courses:</em> Random Dynamical Systems, Celestial Mechanics, Spacecraft Dynamics, Optimal Spacecraft Attitude and Orbital Maneuvers, Estimation of Dynamic Systems, Graduate Mathematics
+          PhD candidate in Aerospace Engineering with a background in control theory, state estimation, and hardware/software validation. Seeking to apply modeling and controls expertise to automotive, robotics, and drone motion control systems.
+        </div>
+      </section>
+
+      <section id="education">
+        <h2>Education</h2>
+        <div class="info-grid">
+          <div class="card">
+            <h3>PhD Aerospace Engineering</h3>
+            Texas A&M University, College Station, TX (2022–Present) <br>
+            GPA: 4.0/4.0<br>
+            <em>Main courses:</em> Random Dynamical Systems, Celestial Mechanics, Spacecraft Dynamics, Optimal Spacecraft Attitude and Orbital Maneuvers, Estimation of Dynamic Systems, Graduate Mathematics
+          </div>
+          <div class="card">
+            <h3>BSc Mechanical Engineering</h3>
+            Waseda University, Tokyo, Japan (2018–2022)<br>
+            GPA: 3.6/4.0<br>
+            <em>Main courses:</em> Calculus, Linear Algebra, Material Mechanics, Mechatronics, Fluid Dynamics, C Programming, Satellite Design
+          </div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <h2>Technical Skills</h2>
+        <div class="skills-list">
+          <div class="skills-group">
+            <b>Programming</b>
+            <ul><li>MATLAB, Simulink, Python, C++</li></ul>
+          </div>
+          <div class="skills-group">
+            <b>Control & Estimation</b>
+            <ul><li>MPC, PID, Optimal control, Kalman (EKF, UKF), Least Square Estimation</li></ul>
+          </div>
+          <div class="skills-group">
+            <b>Optimization Tools</b>
+            <ul><li>IPOPT, SNOPT, fmincon, CasADi</li></ul>
+          </div>
+          <div class="skills-group">
+            <b>Hardware Platforms</b>
+            <ul><li>Arduino, Raspberry Pi</li></ul>
+          </div>
+          <div class="skills-group">
+            <b>CAD/Analysis</b>
+            <ul><li>SolidWorks, AutoCAD, Femap, Nastran</li></ul>
+          </div>
+          <div class="skills-group">
+            <b>Other</b>
+            <ul><li>Microsoft Office, LaTeX</li></ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience">
+        <h2>Work Experience</h2>
+        <div class="card">
+          <h3>Navigation Engineer Intern</h3>
+          VectorNav, Dallas, TX <span style="float:right;">May–Aug 2023</span>
+          <ul>
+            <li>Developed smoothing algorithms for post-Kalman filtering (2x accuracy improvement in navigation systems).</li>
+            <li>Created high-precision geoid undulation algorithms using EGM 2008.</li>
+            <li>Derived recursive formulas for Legendre polynomials.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="research">
+        <h2>Research Experience</h2>
+        <div class="card">
+          <h3>Graduate Research Assistant</h3>
+          Texas A&M University, Aug 2022–Present
+          <ul>
+            <li>Developed Complex Step Differentiation method for efficient dynamic system derivatives.</li>
+            <li>Applied linear least square estimation and covariance analysis for accelerometer configurations.</li>
+            <li>Implemented graph coloring for trajectory optimization (2x real-time speedup).</li>
+            <li>Validated hardware-in-the-loop trajectory optimization on Arduino/Raspberry Pi.</li>
+            <li>Designed MPC algorithms for uncertain nonlinear systems.</li>
+            <li>Integrated deep RL with MPC for motion planning in uncertain dynamics.</li>
+          </ul>
         </div>
         <div class="card">
-          <h3>BSc Mechanical Engineering</h3>
-          Waseda University, Tokyo, Japan (2018–2022)<br>
-          GPA: 3.6/4.0<br>
-          <em>Main courses:</em> Calculus, Linear Algebra, Material Mechanics, Mechatronics, Fluid Dynamics, C Programming, Satellite Design
+          <h3>Technical Trainee</h3>
+          JAXA/ISAS, Kanagawa, Japan <span style="float:right;">Summer 2021</span>
+          <ul>
+            <li>Researched liquid sloshing on spacecraft lunar landing, built physics-based models.</li>
+            <li>Simulated stability & failure modes; validated control laws for landing gear.</li>
+          </ul>
         </div>
-      </div>
-    </section>
-    <section>
-      <h2>Technical Skills</h2>
-      <div class="skills-list">
-        <div class="skills-group">
-          <b>Programming</b>
-          <ul><li>MATLAB, Simulink, Python, C++</li></ul>
+        <div class="card">
+          <h3>Research Project</h3>
+          Waseda University, Tokyo, 2020–2021
+          <ul>
+            <li>Stratosphere balloon experiments for alignment monitoring system.</li>
+            <li>Structural analysis (Femap, Nastran), CAD design with SolidWorks.</li>
+            <li>Built and tested physical prototypes.</li>
+          </ul>
         </div>
-        <div class="skills-group">
-          <b>Control & Estimation</b>
-          <ul><li>MPC, PID, Optimal control, Kalman (EKF, UKF), Least Square Estimation</li></ul>
-        </div>
-        <div class="skills-group">
-          <b>Optimization Tools</b>
-          <ul><li>IPOPT, SNOPT, fmincon, CasADi</li></ul>
-        </div>
-        <div class="skills-group">
-          <b>Hardware Platforms</b>
-          <ul><li>Arduino, Raspberry Pi</li></ul>
-        </div>
-        <div class="skills-group">
-          <b>CAD/Analysis</b>
-          <ul><li>SolidWorks, AutoCAD, Femap, Nastran</li></ul>
-        </div>
-        <div class="skills-group">
-          <b>Other</b>
-          <ul><li>Microsoft Office, LaTeX</li></ul>
-        </div>
-      </div>
-    </section>
-    <section>
-      <h2>Work Experience</h2>
-      <div class="card">
-        <h3>Navigation Engineer Intern</h3>
-        VectorNav, Dallas, TX <span style="float:right;">May–Aug 2023</span>
-        <ul>
-          <li>Developed smoothing algorithms for post-Kalman filtering (2x accuracy improvement in navigation systems).</li>
-          <li>Created high-precision geoid undulation algorithms using EGM 2008.</li>
-          <li>Derived recursive formulas for Legendre polynomials.</li>
+      </section>
+
+      <section id="publications">
+        <h2>Selected Publications</h2>
+        <ul class="pub-list card">
+          <li>
+            Yamamoto, K., Taheri, E., & Junkins, J.L. "Nonlinear MPC for Cislunar Trajectory Correction..."<br>
+            American Control Conference (ACC), 2026 (under review)
+          </li>
+          <li>
+            Yamamoto, K., Taheri, E., Junkins, J. L. "Jacobian Coloring for Multi-Impulse Cislunar Trajectory Optimization", Journal of Aerospace Sci & Tech, Aug 2025 (under review)
+          </li>
+          <li>
+            Yamamoto, K., Junkins, J. L. "Advances in High Precision Partial Derivative Approximation for Black Box Functions", Journal of Astronautical Sciences, June 2025 (under review)
+          </li>
+          <li>
+            Yamamoto, K., Taheri, E., Junkins, J.L. "Comparison of NLP Solvers and Derivative Accuracy...", ACC, IEEE, July 8, 2025
+          </li>
         </ul>
-      </div>
-    </section>
-    <section>
-      <h2>Research Experience</h2>
-      <div class="card">
-        <h3>Graduate Research Assistant</h3>
-        Texas A&M University, Aug 2022–Present
-        <ul>
-          <li>Developed Complex Step Differentiation method for efficient dynamic system derivatives.</li>
-          <li>Applied linear least square estimation and covariance analysis for accelerometer configurations.</li>
-          <li>Implemented graph coloring for trajectory optimization (2x real-time speedup).</li>
-          <li>Validated hardware-in-the-loop trajectory optimization on Arduino/Raspberry Pi.</li>
-          <li>Designed MPC algorithms for uncertain nonlinear systems.</li>
-          <li>Integrated deep RL with MPC for motion planning in uncertain dynamics.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Technical Trainee</h3>
-        JAXA/ISAS, Kanagawa, Japan <span style="float:right;">Summer 2021</span>
-        <ul>
-          <li>Researched liquid sloshing on spacecraft lunar landing, built physics-based models.</li>
-          <li>Simulated stability & failure modes; validated control laws for landing gear.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Research Project</h3>
-        Waseda University, Tokyo, 2020–2021
-        <ul>
-          <li>Stratosphere balloon experiments for alignment monitoring system.</li>
-          <li>Structural analysis (Femap, Nastran), CAD design with SolidWorks.</li>
-          <li>Built and tested physical prototypes.</li>
-        </ul>
-      </div>
-    </section>
-    <section>
-      <h2>Selected Publications</h2>
-      <ul class="pub-list card">
-        <li>
-          Yamamoto, K., Taheri, E., & Junkins, J.L. “Nonlinear MPC for Cislunar Trajectory Correction...”<br>
-          American Control Conference (ACC), 2026 (under review)
-        </li>
-        <li>
-          Yamamoto, K., Taheri, E., Junkins, J. L. "Jacobian Coloring for Multi-Impulse Cislunar Trajectory Optimization", Journal of Aerospace Sci & Tech, Aug 2025 (under review)
-        </li>
-        <li>
-          Yamamoto, K., Junkins, J. L. "Advances in High Precision Partial Derivative Approximation for Black Box Functions", Journal of Astronautical Sciences, June 2025 (under review)
-        </li>
-        <li>
-          Yamamoto, K., Taheri, E., Junkins, J.L. “Comparison of NLP Solvers and Derivative Accuracy...”, ACC, IEEE, July 8, 2025
-        </li>
-      </ul>
-    </section>
-    <section>
-      <h2>Languages</h2>
-      <div class="lang-list">
-        <div class="skills-group"><b>Japanese:</b> Native</div>
-        <div class="skills-group"><b>English:</b> Fluent</div>
-        <div class="skills-group"><b>Italian:</b> Advanced</div>
-        <div class="skills-group"><b>Spanish:</b> Beginner</div>
-      </div>
-    </section>
-    <footer style="text-align:center;color:#c6cef1;font-size:1em;margin-top:2em;">
-      &copy; 2025 Koya Yamamoto. Space Portfolio.
-    </footer>
+      </section>
+
+      <section id="languages">
+        <h2>Languages</h2>
+        <div class="lang-list">
+          <div class="skills-group"><b>Japanese:</b> Native</div>
+          <div class="skills-group"><b>English:</b> Fluent</div>
+          <div class="skills-group"><b>Italian:</b> Advanced</div>
+          <div class="skills-group"><b>Spanish:</b> Beginner</div>
+        </div>
+      </section>
+
+      <footer>
+        &copy; 2025 Koya Yamamoto. Space Portfolio.
+      </footer>
+    </div>
   </div>
+
   <script>
     // Starfield rendering with color and size adapting to theme
     function makeStars() {
@@ -339,20 +606,19 @@
       let w = window.innerWidth, h = window.innerHeight;
       canvas.width = w; canvas.height = h;
       let num = Math.floor(w * h * 0.00017);
-      ctx.clearRect(0,0,w,h);
-      // Color palette switches for theme
+      ctx.clearRect(0, 0, w, h);
       let isLight = document.body.classList.contains('light');
       let palette = isLight ?
-        ['#dee4fa','#fff','#c1f7fa','#bde5ff','#ffe2f7'] :
-        ['#fff','#ffe1f8','#def6ff','#72f7fc','#cee9fc'];
-      for (let i=0; i<num; i++) {
-        let x = Math.random()*w, y = Math.random()*h;
-        let r = Math.random()<0.93 ? Math.random()*0.7+0.3 : Math.random()*2.2+1.2;
-        ctx.beginPath(); ctx.arc(x,y,r,0,2*Math.PI);
-        ctx.globalAlpha = 0.5+Math.random()*0.5;
-        ctx.fillStyle = palette[Math.floor(Math.random()*palette.length)];
+        ['#dee4fa', '#fff', '#c1f7fa', '#bde5ff', '#ffe2f7'] :
+        ['#fff', '#ffe1f8', '#def6ff', '#72f7fc', '#cee9fc'];
+      for (let i = 0; i < num; i++) {
+        let x = Math.random() * w, y = Math.random() * h;
+        let r = Math.random() < 0.93 ? Math.random() * 0.7 + 0.3 : Math.random() * 2.2 + 1.2;
+        ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI);
+        ctx.globalAlpha = 0.5 + Math.random() * 0.5;
+        ctx.fillStyle = palette[Math.floor(Math.random() * palette.length)];
         ctx.shadowColor = ctx.fillStyle;
-        ctx.shadowBlur = r*2;
+        ctx.shadowBlur = r * 2;
         ctx.fill();
         ctx.shadowBlur = 0;
         ctx.globalAlpha = 1;
@@ -366,6 +632,29 @@
       document.body.classList.toggle("light");
       makeStars();
     }
+
+    // Navigation active state
+    function setActive(element) {
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+      });
+      element.classList.add('active');
+    }
+
+    // Set active on scroll
+    window.addEventListener('scroll', () => {
+      let sections = document.querySelectorAll('section');
+      let navLinks = document.querySelectorAll('.nav-link');
+      
+      sections.forEach(section => {
+        let top = section.offsetTop;
+        let height = section.clientHeight;
+        if (window.scrollY >= top - 100 && window.scrollY < top + height) {
+          navLinks.forEach(link => link.classList.remove('active'));
+          let activeLink = document.querySelector(`.nav-link[href="#${section.id}"]`);
+          if (activeLink) activeLink.classList.add('active');
+        }
+      });
+    });
   </script>
 </body>
-</html>
